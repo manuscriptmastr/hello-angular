@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CounterService } from '../counter.service';
 
 @Component({
   selector: 'app-counter',
@@ -6,22 +7,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./counter.component.scss']
 })
 export class CounterComponent implements OnInit {
-  count: number = 0;
+  count: number;
   backgroundColor: string = 'greenyellow';
 
+  constructor(
+    public counterService: CounterService
+  ) { }
+
   ngOnInit() {
+    this.count = this.counterService.count;
   }
-
-  decrementCount() {
-    this.count = this.count < 1 ? 0 : this.count - 1;
-  }
-  
-  incrementCount() {
-    this.count++;
-  }
-
-  resetCount() {
-    this.count = 0;
-  }
-
 }
