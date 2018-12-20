@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class TodoService {
   getTodos() {
-    return fetch('https://jsonplaceholder.typicode.com/todos?completed=false')
+    return fetch('https://jsonplaceholder.typicode.com/todos')
       .then(response => response.json());
   }
 }
