@@ -9,13 +9,21 @@ import { Todo } from '../models';
 })
 export class TodoList implements OnInit {
   todos: Todo[] = [];
+  completedTodos: Todo[] = [];
+  uncompletedTodos: Todo[] = [];
 
   constructor(
-    private todoService: TodoService 
+    private todoService: TodoService
   ) {}
 
   ngOnInit() {
-    this.todoService.getTodos()
-      .then(todos => this.todos = todos);
+    const allTodos = this.todoService.get();
+    allTodos.subscribe(todos => this.todos = todos);
+    allTodos.subscribe(todos =>
+      this.completedTodos = todos.filter(t => t.completed)
+    );
+    allTodos.subscribe(todos =>
+      this.uncompletedTodos = todos.filter(t => !t.completed)
+    )
   }
 }

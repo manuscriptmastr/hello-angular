@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+
 import { Todo } from '../models';
 
 @Component({
@@ -7,4 +8,8 @@ import { Todo } from '../models';
 })
 export class TodoListItem {
   @Input('todo') todo: Todo;
+
+  onChange() {
+    console.log(this.todo.completed);
+  }
 }

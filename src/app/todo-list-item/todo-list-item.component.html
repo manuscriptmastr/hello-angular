@@ -1,6 +1,4 @@
-<li>
-  <label for="todo_{{todo.id}}">
-      <input type="checkbox">
-      {{todo.title}}
-  </label>
-</li>
+<label for="todo_{{todo.id}}">
+  <input type="checkbox" [(ngModel)]="todo.completed">
+  {{todo.title}}
+</label>
