@@ -17,7 +17,7 @@ export class TodoList implements OnInit {
   ) {}
 
   ngOnInit() {
-    const allTodos = this.todoService.get();
+    const allTodos = this.todoService.todos;
     allTodos.subscribe(todos => this.todos = todos);
     allTodos.subscribe(todos =>
       this.completedTodos = todos.filter(t => t.completed)
@@ -25,5 +25,13 @@ export class TodoList implements OnInit {
     allTodos.subscribe(todos =>
       this.uncompletedTodos = todos.filter(t => !t.completed)
     )
+  }
+
+  completeTodo(id: number) {
+    this.todoService.completeTodo(id);
+  }
+
+  uncompleteTodo(id: number) {
+    this.todoService.uncompleteTodo(id);
   }
 }

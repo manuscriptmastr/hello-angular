@@ -1,12 +1,12 @@
 <h1>Todo List</h1>
 <ul *ngIf="uncompletedTodos.length">
   <li *ngFor="let todo of uncompletedTodos">
-    <todo-list-item [todo]="todo"></todo-list-item>
+    <todo-list-item (click)="completeTodo(todo.id)" [todo]="todo"></todo-list-item>
   </li>
 </ul>
 <h2>Completed:</h2>
 <ul *ngIf="completedTodos.length">
   <li *ngFor="let todo of completedTodos">
-    <todo-list-item [todo]="todo"></todo-list-item>
+    <todo-list-item (click)="uncompleteTodo(todo.id)" [todo]="todo"></todo-list-item>
   </li>
 </ul>

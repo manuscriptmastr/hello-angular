@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 import { Todo } from '../models';
@@ -8,19 +8,22 @@ import { Todo } from '../models';
   providedIn: 'root'
 })
 export class TodoService {
-  todos: Observable<Todo[]>;
+  todos: BehaviorSubject<Todo[]> = new BehaviorSubject([]);
 
-  constructor(
-    private http: HttpClient
-  ) {}
+  constructor(private http: HttpClient) {
+    this.http.get<[]>('https://jsonplaceholder.typicode.com/todos')
+      .subscribe(todos => this.todos.next(todos));
+  }
 
-  get() {
-    if (this.todos) {
-      return this.todos;
-    } else {
-      const newTodos: Observable<Todo[]> = this.http.get('https://jsonplaceholder.typicode.com/todos');
-      this.todos = newTodos;
-      return newTodos;
-    }
+  completeTodo(id: number) {
+    const newTodos = this.todos.value
+      .map(t => t.id !== id ? t : ({ ...t, completed: true }));
+    this.todos.next(newTodos);
+  }
+
+  uncompleteTodo(id: number) {
+    const newTodos = this.todos.value
+      .map(t => t.id !== id ? t : ({ ...t, completed: false }));
+    this.todos.next(newTodos);
   }
 }
