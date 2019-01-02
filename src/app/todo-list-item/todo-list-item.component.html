@@ -1,4 +1,4 @@
 <label for="todo_{{todo.id}}">
-  <input type="checkbox" [(ngModel)]="todo.completed">
+  <input type="checkbox" [(ngModel)]="todo.completed" (click)="toggleTodo()">
   {{todo.title}}
 </label>

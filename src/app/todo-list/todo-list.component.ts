@@ -26,12 +26,4 @@ export class TodoList implements OnInit {
       this.uncompletedTodos = todos.filter(t => !t.completed)
     )
   }
-
-  completeTodo(id: number) {
-    this.todoService.completeTodo(id);
-  }
-
-  uncompleteTodo(id: number) {
-    this.todoService.uncompleteTodo(id);
-  }
 }

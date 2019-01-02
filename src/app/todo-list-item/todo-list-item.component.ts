@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 
 import { Todo } from '../models';
+import { TodoService } from '../services';
 
 @Component({
   selector: 'todo-list-item',
@@ -9,7 +10,15 @@ import { Todo } from '../models';
 export class TodoListItem {
   @Input('todo') todo: Todo;
 
-  onChange() {
-    console.log(this.todo.completed);
+  constructor(
+    private todoService: TodoService
+  ) {}
+
+  toggleTodo() {
+    if (this.todo.completed) {
+      this.todoService.uncompleteTodo(this.todo.id);
+    } else {
+      this.todoService.completeTodo(this.todo.id);
+    }
   }
 }
