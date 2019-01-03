@@ -8,7 +8,6 @@
     *ngIf="editable; else notEditable"
     type="text"
     [(ngModel)]="todo.title"
-    [value]="todo.title"
     (keydown.enter)="setEditable(false)"
     (keydown.escape)="setEditable(false)"
   />
