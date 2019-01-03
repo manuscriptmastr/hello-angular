@@ -3,7 +3,7 @@
     type="checkbox"
     [(ngModel)]="todo.completed"
     (click)="toggleTodo()"
-  >
+  />
   <input
     *ngIf="editable; else notEditable"
     type="text"
