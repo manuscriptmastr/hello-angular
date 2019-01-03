@@ -1,4 +1,18 @@
-<label for="todo_{{todo.id}}">
-  <input type="checkbox" [(ngModel)]="todo.completed" (click)="toggleTodo()">
-  {{todo.title}}
+<label for="todo_{{todo.id}}" (click)="setEditable(true)">
+  <input
+    type="checkbox"
+    [(ngModel)]="todo.completed"
+    (click)="toggleTodo()"
+  >
+  <input
+    *ngIf="editable; else notEditable"
+    type="text"
+    [(ngModel)]="todo.title"
+    [value]="todo.title"
+    (keydown.enter)="setEditable(false)"
+    (keydown.escape)="setEditable(false)"
+  />
+  <ng-template #notEditable>
+    {{todo.title}}
+  </ng-template>
 </label>

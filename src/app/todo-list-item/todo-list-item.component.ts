@@ -8,6 +8,8 @@ import { TodoService } from '../services';
   templateUrl: './todo-list-item.component.html'
 })
 export class TodoListItem {
+  editable: boolean = false;
+
   @Input('todo') todo: Todo;
 
   constructor(
@@ -20,5 +22,9 @@ export class TodoListItem {
     } else {
       this.todoService.completeTodo(this.todo.id);
     }
+  }
+
+  setEditable(isEditable: boolean) {
+    this.editable = isEditable;
   }
 }
